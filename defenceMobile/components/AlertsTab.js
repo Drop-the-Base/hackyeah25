@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, FlatList, StyleSheet, SafeAreaView } from 'react-native';
+import { View, Text, FlatList, StyleSheet} from 'react-native';
 import {
   AlertTriangle,
   CloudRain,
@@ -9,6 +9,7 @@ import {
   Mountain,
   Clock,
 } from 'lucide-react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 // ───────────────────────────────── Local UI ───────────────────────────────────
 const Card = ({ children, style }) => <View style={[styles.card, style]}>{children}</View>;

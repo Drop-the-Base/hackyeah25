@@ -9,9 +9,9 @@ import {
   Modal,
   Image,
   TouchableOpacity,
-  SafeAreaView, // ← z react-native
 } from 'react-native';
 import { ChevronRight, Search as SearchIcon, X } from 'lucide-react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 // ───────────────────────────── Local UI ─────────────────────────────
 const Card = ({ children, style }) => <View style={[styles.card, style]}>{children}</View>;
@@ -189,7 +189,7 @@ export default function GuidesScreen() {
       <View style={styles.searchWrap}>
         <SearchIcon size={18} color="#9ca3af" style={styles.searchIcon} />
         <TextInput
-          placeholder="Search guides, categories, or skills..."
+          placeholder="Search guides"
           value={searchQuery}
           onChangeText={setSearchQuery}
           style={styles.input}

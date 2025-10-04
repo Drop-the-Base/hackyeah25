@@ -4,11 +4,11 @@ import {
   Text,
   FlatList,
   StyleSheet,
-  SafeAreaView,
   Pressable,
   ScrollView,
 } from 'react-native';
 import { Package, Check, Clock, AlertTriangle, Star } from 'lucide-react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 // ───────────────────────────── Local UI ─────────────────────────────
 const Card = ({ children, style }) => (

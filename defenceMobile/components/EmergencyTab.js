@@ -6,7 +6,6 @@ import {
   TouchableOpacity,
   ScrollView,
   TextInput,
-  SafeAreaView,
   KeyboardAvoidingView,
   Platform,
   Linking
@@ -22,6 +21,7 @@ import {
   User,
   Loader2
 } from 'lucide-react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const emergencyNumbers = [
   { id: 1, service: 'Emergency Services', number: '112', icon: AlertTriangle, color: '#ef4444', description: 'Life-threatening emergencies' },

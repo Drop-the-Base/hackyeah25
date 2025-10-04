@@ -1,8 +1,9 @@
 // App.js (React Native / Expo)
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, ScrollView, SafeAreaView } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, ScrollView } from 'react-native';
 import { MapPin, AlertTriangle, BookOpen, Bell, Package, X } from 'lucide-react-native';
 import { StatusBar } from 'expo-status-bar';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 import MapTab from './components/MapTab';
 import EmergencyTab from './components/EmergencyTab';
@@ -36,7 +37,7 @@ export default function App() {
   };
 
   return (
-    <SafeAreaView style={styles.safeArea}>
+    <SafeAreaView style={styles.safeArea} edges={['top', 'bottom']}>
       <StatusBar style="auto" />
 
       {/* Alert banner */}
