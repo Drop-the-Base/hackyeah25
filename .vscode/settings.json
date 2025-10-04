@@ -1,0 +1,11 @@
+{
+    "al.enableCodeActions": false,
+    "al.enableCodeAnalysis": true,
+    "al.codeAnalyzers": [
+        "${CodeCop}",
+        "${UICop}"
+    ],
+    "editor.formatOnSave": true,
+    "files.encoding": "utf8",
+    "files.trimTrailingWhitespace": true
+}
