@@ -3,7 +3,7 @@ import {
   View,
   Text,
   StyleSheet,
-  FlatList,
+  ScrollView,
   TextInput,
   Pressable,
   Modal,
@@ -181,42 +181,10 @@ export default function GuidesScreen() {
 
   const clearSearch = () => setSearchQuery('');
 
-  const renderHeader = (
-    <View>
-      <Text style={styles.title}>Survival Guides</Text>
-
-      {/* Search Bar */}
-      <View style={styles.searchWrap}>
-        <SearchIcon size={18} color="#9ca3af" style={styles.searchIcon} />
-        <TextInput
-          placeholder="Search guides"
-          value={searchQuery}
-          onChangeText={setSearchQuery}
-          style={styles.input}
-          placeholderTextColor="#9ca3af"
-        />
-        {searchQuery ? (
-          <TouchableOpacity onPress={clearSearch} style={styles.clearBtn}>
-            <X size={16} color="#6b7280" />
-          </TouchableOpacity>
-        ) : null}
-      </View>
-
-      {/* Search info */}
-      {searchQuery ? (
-        <Text style={styles.searchInfo}>
-          {filteredGuides.length > 0
-            ? `Found ${filteredGuides.length} guide${filteredGuides.length === 1 ? '' : 's'} matching "${searchQuery}"`
-            : `No guides found matching "${searchQuery}"`}
-        </Text>
-      ) : null}
-    </View>
-  );
-
-  const renderItem = ({ item: guide }) => {
+  const renderItem = (guide) => {
     const diff = difficultyStyles[guide.difficulty] || { bg: '#e5e7eb', text: '#374151' };
     return (
-      <Pressable onPress={() => setSelectedGuide(guide)}>
+      <Pressable key={guide.id} onPress={() => setSelectedGuide(guide)}>
         <Card>
           <View style={styles.row}>
             <View style={styles.thumb}>
@@ -245,21 +213,44 @@ export default function GuidesScreen() {
 
   return (
     <SafeAreaView style={styles.safe}>
-      <FlatList
-        data={filteredGuides}
-        keyExtractor={(g) => String(g.id)}
-        ListHeaderComponent={renderHeader}
-        renderItem={renderItem}
-        ItemSeparatorComponent={() => <View style={{ height: 12 }} />}
-        contentContainerStyle={{ padding: 16, paddingBottom: 24 }}
-      />
+      <ScrollView contentContainerStyle={{ padding: 16, paddingBottom: 24 }}>
+        {/* Header */}
+        <Text style={styles.title}>Survival Guides</Text>
+
+        <View style={styles.searchWrap}>
+          <SearchIcon size={18} color="#9ca3af" style={styles.searchIcon} />
+          <TextInput
+            placeholder="Search guides"
+            value={searchQuery}
+            onChangeText={setSearchQuery}
+            style={styles.input}
+            placeholderTextColor="#9ca3af"
+          />
+          {searchQuery ? (
+            <TouchableOpacity onPress={clearSearch} style={styles.clearBtn}>
+              <X size={16} color="#6b7280" />
+            </TouchableOpacity>
+          ) : null}
+        </View>
+
+        {searchQuery ? (
+          <Text style={styles.searchInfo}>
+            {filteredGuides.length > 0
+              ? `Found ${filteredGuides.length} guide${filteredGuides.length === 1 ? '' : 's'} matching "${searchQuery}"`
+              : `No guides found matching "${searchQuery}"`}
+          </Text>
+        ) : null}
+
+        {/* Guides */}
+        {filteredGuides.map(renderItem)}
+      </ScrollView>
 
       {/* Dialog / Modal */}
       <Modal visible={!!selectedGuide} animationType="slide" onRequestClose={() => setSelectedGuide(null)} transparent>
         <View style={styles.modalBackdrop}>
           <View style={styles.modalCard}>
             {selectedGuide && (
-              <>
+              <ScrollView contentContainerStyle={{ paddingBottom: 16 }}>
                 <View style={styles.modalHeader}>
                   <View style={styles.modalThumb}>
                     <ImageWithFallback source={{ uri: selectedGuide.image }} style={styles.modalThumbImage} />
@@ -288,26 +279,20 @@ export default function GuidesScreen() {
                   <Text style={styles.timeText}>⏱️ {selectedGuide.time}</Text>
                 </View>
 
-                <FlatList
-                  data={selectedGuide.steps}
-                  keyExtractor={(s, i) => `${i}-${s.slice(0, 8)}`}
-                  renderItem={({ item: step, index }) => (
-                    <View style={styles.stepRow}>
-                      <View style={styles.stepBadge}>
-                        <Text style={styles.stepBadgeText}>{index + 1}</Text>
-                      </View>
-                      <Text style={styles.stepText}>{step}</Text>
+                <Text style={styles.stepsTitle}>Step-by-step instructions:</Text>
+                {selectedGuide.steps.map((step, index) => (
+                  <View key={index} style={styles.stepRow}>
+                    <View style={styles.stepBadge}>
+                      <Text style={styles.stepBadgeText}>{index + 1}</Text>
                     </View>
-                  )}
-                  ItemSeparatorComponent={() => <View style={{ height: 8 }} />}
-                  contentContainerStyle={{ paddingBottom: 8 }}
-                  ListHeaderComponent={<Text style={styles.stepsTitle}>Step-by-step instructions:</Text>}
-                />
+                    <Text style={styles.stepText}>{step}</Text>
+                  </View>
+                ))}
 
                 <Button variant="outline" onPress={() => setSelectedGuide(null)} style={{ marginTop: 12 }}>
                   Close
                 </Button>
-              </>
+              </ScrollView>
             )}
           </View>
         </View>
