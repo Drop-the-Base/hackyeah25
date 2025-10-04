@@ -2,7 +2,6 @@ import React, { useMemo, useState } from 'react';
 import {
   View,
   Text,
-  FlatList,
   StyleSheet,
   Pressable,
   ScrollView,
@@ -41,7 +40,6 @@ const Checkbox = ({ checked, onToggle, size = 20 }) => (
 );
 
 // ───────────────────────────── Types & Data ─────────────────────────
-/** Checklist items from your web version (unchanged) */
 const survivalItems = [
   // Essential
   { id: 1, name: 'First Aid Kit', category: 'Medical', priority: 'essential', description: 'Bandages, antiseptic, pain relievers', quantity: '1 complete kit' },
@@ -147,13 +145,16 @@ export default function ChecklistScreen() {
     );
   };
 
-  const renderItem = ({ item }) => {
+  const renderItem = (item) => {
     const isChecked = checkedIds.has(item.id);
     const theme = priorityTheme[item.priority] || priorityTheme.useful;
 
     return (
-      <Card style={[isChecked && { backgroundColor: '#ecfdf5', borderColor: '#bbf7d0' }]}>
-      <Pressable onPress={() => handleItemToggle(item.id)}>
+      <Card
+        key={item.id}
+        style={[isChecked && { backgroundColor: '#ecfdf5', borderColor: '#bbf7d0' }]}
+      >
+        <Pressable onPress={() => handleItemToggle(item.id)}>
 
           <Text style={[styles.itemTitle, isChecked && styles.strike]}>{item.name}</Text>
 
@@ -164,9 +165,9 @@ export default function ChecklistScreen() {
                   <Text style={styles.badgeText}>{item.category}</Text>
                 </Badge>
                 <Badge
-                    outline
-                    style={{ backgroundColor: theme.bg, borderColor: theme.border }}
-                    textStyle={{ color: theme.text }}
+                  outline
+                  style={{ backgroundColor: theme.bg, borderColor: theme.border }}
+                  textStyle={{ color: theme.text }}
                 >
                   <View style={styles.priorityBadgeContent}>
                     {item.priority === 'essential' ? <Star size={12} color={theme.text} style={{ marginRight: 4 }} /> : null}
@@ -180,9 +181,9 @@ export default function ChecklistScreen() {
             {item.quantity ? <Text style={styles.itemQty}>Quantity: {item.quantity}</Text> : null}
           </View>
 
-        <View style={styles.itemRow}>
-          <Checkbox checked={isChecked} onToggle={() => handleItemToggle(item.id)} />
-        </View>
+          <View style={styles.itemRow}>
+            <Checkbox checked={isChecked} onToggle={() => handleItemToggle(item.id)} />
+          </View>
         </Pressable>
       </Card>
     );
@@ -190,7 +191,8 @@ export default function ChecklistScreen() {
 
   return (
     <SafeAreaView style={styles.safe}>
-      <View style={styles.container}>
+      <ScrollView contentContainerStyle={{ paddingHorizontal: 16, paddingTop: 8, paddingBottom: 16 }}>
+
         {/* Header */}
         <Text style={styles.title}>Survival Gear Checklist</Text>
 
@@ -201,7 +203,7 @@ export default function ChecklistScreen() {
           {renderProgressRow('Useful Items', 'useful')}
         </Card>
 
-        {/* Category Filter (chips zamiast Tabs) */}
+        {/* Category Filter */}
         <ScrollView
           horizontal
           showsHorizontalScrollIndicator={false}
@@ -213,27 +215,16 @@ export default function ChecklistScreen() {
               <Pressable
                 key={cat}
                 onPress={() => setSelectedCategory(cat)}
-                style={[
-                  styles.chip,
-                  active ? styles.chipActive : null,
-                ]}
+                style={[styles.chip, active ? styles.chipActive : null]}
               >
-                <Text style={[styles.chipText, active ? styles.chipTextActive : null]}>
-                  {cat}
-                </Text>
+                <Text style={[styles.chipText, active ? styles.chipTextActive : null]}>{cat}</Text>
               </Pressable>
             );
           })}
         </ScrollView>
 
         {/* Items */}
-        <FlatList
-          data={filteredItems}
-          keyExtractor={(i) => String(i.id)}
-          renderItem={renderItem}
-          ItemSeparatorComponent={() => <View style={{ height: 12 }} />}
-          contentContainerStyle={{ paddingBottom: 16 }}
-        />
+        {filteredItems.map(renderItem)}
 
         {/* Completion Summary */}
         {checkedIds.size > 0 && (
@@ -253,7 +244,8 @@ export default function ChecklistScreen() {
             </View>
           </Card>
         )}
-      </View>
+
+      </ScrollView>
     </SafeAreaView>
   );
 }
@@ -261,10 +253,7 @@ export default function ChecklistScreen() {
 // ───────────────────────────── Styles ─────────────────────────────
 const styles = StyleSheet.create({
   safe: { flex: 1, backgroundColor: '#fff' },
-  container: { flex: 1, paddingHorizontal: 16, paddingTop: 8 },
-
   title: { fontSize: 20, fontWeight: '700', color: '#111827', marginBottom: 8 },
-
   card: {
     borderRadius: 14,
     borderWidth: 1,
@@ -273,80 +262,35 @@ const styles = StyleSheet.create({
     padding: 12,
     marginBottom: 12,
   },
-
   // Progress
-  progressRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    marginVertical: 6,
-  },
+  progressRow: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginVertical: 6 },
   progressLabel: { fontSize: 14, color: '#111827' },
   progressRight: { flexDirection: 'row', alignItems: 'center' },
   progressCount: { fontSize: 12, color: '#6b7280', marginRight: 8 },
-  progressBarTrack: {
-    width: 90,
-    height: 8,
-    backgroundColor: '#e5e7eb',
-    borderRadius: 999,
-    overflow: 'hidden',
-  },
+  progressBarTrack: { width: 90, height: 8, backgroundColor: '#e5e7eb', borderRadius: 999, overflow: 'hidden' },
   progressBarFill: { height: '100%' },
-
-  // Chips (Tabs)
+  // Chips
   chipsRow: { paddingVertical: 4 },
-  chip: {
-    paddingHorizontal: 12,
-    paddingVertical: 8,
-    borderRadius: 999,
-    borderWidth: 1,
-    borderColor: '#e5e7eb',
-    marginRight: 8,
-    backgroundColor: '#fff',
-  },
-  chipActive: {
-    backgroundColor: '#111827',
-    borderColor: '#111827',
-  },
+  chip: { paddingHorizontal: 12, paddingVertical: 8, borderRadius: 999, borderWidth: 1, borderColor: '#e5e7eb', marginRight: 8, backgroundColor: '#fff' },
+  chipActive: { backgroundColor: '#111827', borderColor: '#111827' },
   chipText: { fontSize: 12, color: '#111827' },
   chipTextActive: { color: '#fff', fontWeight: '600' },
-
   // Item row
   itemRow: { flexDirection: 'row', alignItems: 'flex-start' },
-  checkbox: {
-    borderWidth: 2,
-    borderColor: '#d1d5db',
-    borderRadius: 6,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: 2,
-    marginRight: 10,
-    backgroundColor: '#fff',
-  },
+  checkbox: { borderWidth: 2, borderColor: '#d1d5db', borderRadius: 6, alignItems: 'center', justifyContent: 'center', marginTop: 2, marginRight: 10, backgroundColor: '#fff' },
   checkboxChecked: { backgroundColor: '#10b981', borderColor: '#10b981' },
-
   itemBody: { flex: 1 },
   itemHeader: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' },
   itemTitle: { fontSize: 16, fontWeight: '600', color: '#111827' },
   strike: { textDecorationLine: 'line-through', color: '#6b7280' },
-
   badgesRow: { flexDirection: 'row', alignItems: 'center', gap: 8 },
-  badgeBase: {
-    paddingHorizontal: 8,
-    paddingVertical: 4,
-    borderRadius: 8,
-    alignSelf: 'flex-start',
-    marginLeft: 8,
-  },
+  badgeBase: { paddingHorizontal: 8, paddingVertical: 4, borderRadius: 8, alignSelf: 'flex-start', marginLeft: 8 },
   badgeSolid: { backgroundColor: '#111827' },
   badgeOutline: { borderWidth: 1, borderColor: '#e5e7eb', backgroundColor: '#fff' },
   badgeText: { fontSize: 10, fontWeight: '700', color: '#111827' },
   priorityBadgeContent: { flexDirection: 'row', alignItems: 'center' },
-
   itemDesc: { marginTop: 4, fontSize: 13, color: '#374151' },
   itemQty: { marginTop: 2, fontSize: 11, color: '#6b7280' },
-
-  // Summary
   summaryRow: { flexDirection: 'row', alignItems: 'center' },
   summaryMain: { color: '#065f46', fontWeight: '700' },
   summarySub: { color: '#047857', fontSize: 12 },
