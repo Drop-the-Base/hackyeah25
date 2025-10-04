@@ -13,7 +13,7 @@ import AlertsTab from './components/AlertsTab';
 
 // Mock danych z alertami
 const mockAlerts = [
-  { id: 1, severity: 'high', title: 'Flood Warning', message: 'River level rising rapidly', icon: AlertTriangle },
+  { id: 1, severity: 'high', title: 'Airspace Alert: Drone Activity Detected', message: 'Unidentified drones spotted near the eastern border. Stay indoors and avoid open areas until authorities confirm safety.', icon: AlertTriangle },
   { id: 2, severity: 'medium', title: 'Heatwave', message: 'Stay hydrated and avoid sun', icon: AlertTriangle },
 ];
 
