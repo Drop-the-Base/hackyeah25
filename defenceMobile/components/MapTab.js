@@ -134,6 +134,9 @@ export default function MapScreen() {
             );
           })}
         </View>
+        <Text style={{ textAlign: 'center', marginTop: 8, color: '#6b7280' }}>
+          Your location may vary, due to GPS jamming
+        </Text>
 
         {/* popup */}
         {selectedLocation && (
