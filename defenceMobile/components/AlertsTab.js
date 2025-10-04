@@ -24,7 +24,7 @@ const Badge = ({ children, outline, style }) => (
 export const mockAlerts = [
   {
     id: 1,
-    title: 'Airspace Alert: Drone Activity Detected',
+    title: 'Drone Activity Detected',
     message:
       'Unidentified drones spotted near the eastern border. Stay indoors and avoid open areas until authorities confirm safety.',
     type: 'security',
