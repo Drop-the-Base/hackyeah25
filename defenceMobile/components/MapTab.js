@@ -6,7 +6,6 @@ import {
   ImageBackground,
   Pressable,
   FlatList,
-  SafeAreaView,
 } from 'react-native';
 import {
   MapPin,
@@ -17,6 +16,7 @@ import {
   Navigation,
   Loader2,
 } from 'lucide-react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 // ───────────────────────── Local UI ─────────────────────────
 const Card = ({ children, style, ...rest }) => (
