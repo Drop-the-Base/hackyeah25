@@ -27,16 +27,12 @@ const Card = ({ children, style, ...rest }) => (
 // ─────────────── Data ───────────────
 const mockLocations = [
   { id: 1, name: 'Emergency Shelter A', type: 'shelter', lat: 37.7749, lng: -122.4194, icon: Mountain, description: 'Protected emergency shelter with basic supplies', distance: '0.5 km away' },
-  { id: 2, name: 'Water Source - Creek', type: 'water', lat: 37.7849, lng: -122.4294, icon: Waves, description: 'Fresh water creek - requires purification', distance: '1.2 km away' },
+  { id: 2, name: 'River Crossing', type: 'water', lat: 37.7849, lng: -122.4294, icon: Waves, description: 'Fresh water creek - requires purification', distance: '1.2 km away' },
   { id: 3, name: 'Forest Camp Site', type: 'camp', lat: 37.7649, lng: -122.4094, icon: TreePine, description: 'Established camping area with fire pit', distance: '0.8 km away' },
   { id: 4, name: 'Ranger Station', type: 'help', lat: 37.7549, lng: -122.4394, icon: MapPin, description: 'Park ranger station - emergency assistance available', distance: '2.1 km away' },
   { id: 5, name: 'High Ground Point', type: 'shelter', lat: 37.7949, lng: -122.4494, icon: Mountain, description: 'Elevated area safe from flooding', distance: '1.7 km away' },
   { id: 6, name: 'Abandoned Cabin', type: 'shelter', lat: 37.7699, lng: -122.4554, icon: Mountain, description: 'Old wooden cabin, partially damaged but usable as cover', distance: '3.4 km away' },
-  { id: 7, name: 'River Crossing', type: 'water', lat: 37.7819, lng: -122.4044, icon: Waves, description: 'Shallow part of the river suitable for crossing or refilling bottles', distance: '2.3 km away' },
-  { id: 8, name: 'Signal Hill', type: 'help', lat: 37.7999, lng: -122.4354, icon: MapPin, description: 'Elevated open area ideal for sending visual signals or radio transmission', distance: '3.1 km away' },
-  { id: 9, name: 'Hidden Grove Camp', type: 'camp', lat: 37.7599, lng: -122.4254, icon: TreePine, description: 'Secluded grove with natural wind protection and space for tents', distance: '2.6 km away' },
-  { id: 10, name: 'Water Reservoir Station', type: 'water', lat: 37.7499, lng: -122.4099, icon: Waves, description: 'Old reservoir facility — good emergency water source', distance: '3.8 km away' },
-];
+  { id: 7, name: 'Water Source - Creek', type: 'water', lat: 37.7819, lng: -122.4044, icon: Waves, description: 'Shallow part of the river suitable for crossing or refilling bottles', distance: '2.3 km away' },];
 
 // procentowe pozycje pinów względem kontenera
 const pinNormPositions = [
