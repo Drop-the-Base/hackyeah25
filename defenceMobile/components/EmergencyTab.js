@@ -25,13 +25,17 @@ import {
 
 const emergencyNumbers = [
   { id: 1, service: 'Emergency Services', number: '112', icon: AlertTriangle, color: '#ef4444', description: 'Life-threatening emergencies' },
-  { id: 2, service: 'Fire Department', number: '998', icon: Flame, color: '#f97316', description: 'Fire, explosion, hazmat' },
-  { id: 3, service: 'Police', number: '997', icon: Shield, color: '#3b82f6', description: 'Crime, violence, theft' },
+  { id: 2, service: 'Police', number: '997', icon: Shield, color: '#3b82f6', description: 'Crime, violence, theft' },
+  { id: 3, service: 'Fire Department', number: '998', icon: Flame, color: '#f97316', description: 'Fire, explosion, hazmat' },
   { id: 4, service: 'Medical Emergency', number: '999', icon: Ambulance, color: '#22c55e', description: 'Serious injury, illness' },
-  { id: 5, service: 'Poison Control', number: '1-800-222-1222', icon: Phone, color: '#a855f7', description: 'Poisoning, overdose' },
-  { id: 6, service: 'Park Rangers', number: '(555) 123-4567', icon: Shield, color: '#16a34a', description: 'Wilderness emergencies' },
-  { id: 7, service: 'Mountain Rescue', number: '(555) 234-5678', icon: AlertTriangle, color: '#ea580c', description: 'Search and rescue' },
-  { id: 8, service: 'Coast Guard', number: '(555) 345-6789', icon: Phone, color: '#2563eb', description: 'Water emergencies' },
+  { id: 5, service: 'GOPR / TOPR', number: '601 300 300', icon: AlertTriangle, color: '#ea580c', description: 'Search and rescue' },
+  { id: 6, service: 'MOPR / WOPR', number: '601 100 100', icon: Phone, color: '#2563eb', description: 'Water emergencies' },
+  { id: 7, service: 'Energy Emergency', number: '991', icon: AlertTriangle, color: '#f87171', description: 'Power outages, electrical hazards' },
+  { id: 8, service: 'Gas Emergency', number: '992', icon: Flame, color: '#fbbf24', description: 'Gas leaks, explosions' },
+  { id: 9, service: 'Heating Emergency', number: '993', icon: Flame, color: '#f97316', description: 'Heating system failures' },
+  { id: 10, service: 'Water & Sewage Emergency', number: '994', icon: Phone, color: '#3b82f6', description: 'Water supply or sewage issues' },
+  { id: 11, service: 'Child Alert', number: '995', icon: Shield, color: '#22c55e', description: 'Serious injury, illness' },
+
 ];
 
 const survivalKnowledge = {
