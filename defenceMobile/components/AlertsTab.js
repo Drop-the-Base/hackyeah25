@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, ScrollView, StyleSheet } from 'react-native';
+import { View, Text, FlatList, StyleSheet, SafeAreaView } from 'react-native';
 import {
   AlertTriangle,
   CloudRain,
@@ -7,279 +7,287 @@ import {
   Thermometer,
   Zap,
   Mountain,
-  Clock
+  Clock,
 } from 'lucide-react-native';
 
-// --- Mock dane ---
+// ───────────────────────────────── Local UI ───────────────────────────────────
+const Card = ({ children, style }) => <View style={[styles.card, style]}>{children}</View>;
+
+const Badge = ({ children, outline, style }) => (
+  <View style={[styles.badgeBase, outline ? styles.badgeOutline : styles.badgeSolid, style]}>
+    <Text style={styles.badgeText}>{children}</Text>
+  </View>
+);
+
+// ───────────────────────────────── Data ───────────────────────────────────────
 export const mockAlerts = [
   {
     id: 1,
-    title: 'Severe Weather Warning',
-    message: 'Heavy thunderstorms expected in your area. Seek shelter immediately.',
-    type: 'weather',
+    title: 'Airspace Alert: Drone Activity Detected',
+    message:
+      'Unidentified drones spotted near the eastern border. Stay indoors and avoid open areas until authorities confirm safety.',
+    type: 'security',
     severity: 'high',
-    timestamp: '2 minutes ago',
-    icon: CloudRain,
-    location: 'Your Area'
+    timestamp: '5 minutes ago',
+    icon: AlertTriangle,
+    location: 'Podlaskie Voivodeship',
   },
   {
     id: 2,
-    title: 'Flash Flood Watch',
-    message: 'Flash flooding possible in low-lying areas. Avoid crossing streams.',
+    title: 'Severe Storm Warning',
+    message:
+      'Intense thunderstorms with hail and strong winds expected this evening. Avoid travel if possible.',
     type: 'weather',
     severity: 'high',
-    timestamp: '15 minutes ago',
-    icon: AlertTriangle,
-    location: 'Valley Region'
+    timestamp: '20 minutes ago',
+    icon: CloudRain,
+    location: 'Mazovia Region',
   },
   {
     id: 3,
-    title: 'High Wind Advisory',
-    message: 'Winds up to 45 mph expected. Secure loose objects and avoid exposed areas.',
+    title: 'Flood Risk Alert',
+    message:
+      'Vistula River water levels rising due to heavy rainfall. Low-lying areas may flood overnight.',
     type: 'weather',
-    severity: 'medium',
+    severity: 'high',
     timestamp: '1 hour ago',
     icon: Wind,
-    location: 'Mountain Ridge'
+    location: 'Kujawsko-Pomorskie',
   },
   {
     id: 4,
-    title: 'Temperature Drop',
-    message: 'Temperatures falling rapidly. Hypothermia risk increased.',
+    title: 'Air Pollution Warning',
+    message:
+      'High smog levels detected. Limit outdoor activity and use masks if necessary.',
     type: 'health',
     severity: 'medium',
     timestamp: '2 hours ago',
     icon: Thermometer,
-    location: 'All Areas'
+    location: 'Kraków',
   },
   {
     id: 5,
-    title: 'Lightning Strike Nearby',
-    message: 'Lightning activity detected within 5 miles. Take immediate shelter.',
-    type: 'weather',
-    severity: 'high',
+    title: 'Power Outage Reported',
+    message:
+      'Strong winds caused partial power outages in several districts. Repair crews are working to restore electricity.',
+    type: 'infrastructure',
+    severity: 'medium',
     timestamp: '3 hours ago',
     icon: Zap,
-    location: 'North Trail'
+    location: 'Łódź Region',
   },
   {
     id: 6,
-    title: 'Rockfall Warning',
-    message: 'Unstable conditions on mountain face. Avoid climbing routes.',
-    type: 'terrain',
+    title: 'Railway Disruption',
+    message:
+      'Train delays and cancellations due to technical failures near Warsaw Central. Check PKP schedule updates.',
+    type: 'transport',
     severity: 'medium',
     timestamp: '4 hours ago',
     icon: Mountain,
-    location: 'East Face'
-  },
-  {
-    id: 7,
-    title: 'Search and Rescue Update',
-    message: 'Missing hiker found safe. All search operations concluded.',
-    type: 'rescue',
-    severity: 'low',
-    timestamp: '6 hours ago',
-    icon: AlertTriangle,
-    location: 'South Ridge'
+    location: 'Warsaw',
   },
   {
     id: 8,
-    title: 'Trail Closure Notice',
-    message: 'Main trail closed due to bridge damage. Use alternate route.',
-    type: 'trail',
+    title: 'Heatwave Advisory',
+    message:
+      'Temperatures expected to exceed 35°C. Stay hydrated and avoid direct sunlight during midday hours.',
+    type: 'weather',
+    severity: 'medium',
+    timestamp: '1 day ago',
+    icon: Thermometer,
+    location: 'Wrocław',
+  },
+  {
+    id: 9,
+    title: 'Cybersecurity Notice',
+    message:
+      'Government services experiencing DDoS attacks. Online portals may be temporarily unavailable.',
+    type: 'security',
     severity: 'low',
     timestamp: '1 day ago',
+    icon: Zap,
+    location: 'Nationwide',
+  },
+  {
+    id: 10,
+    title: 'Forest Fire Warning',
+    message:
+      'Dry conditions increase fire risk in forested areas. Campfires and open flames are prohibited.',
+    type: 'environment',
+    severity: 'medium',
+    timestamp: '2 days ago',
     icon: Mountain,
-    location: 'Main Trail'
-  }
+    location: 'Bieszczady Mountains',
+  },
 ];
 
-export function AlertsTab() {
-  const getSeverityStyle = (severity) => {
-    switch (severity) {
-      case 'high':
-        return { borderLeftColor: '#DC2626', backgroundColor: '#FEE2E2' };
-      case 'medium':
-        return { borderLeftColor: '#EAB308', backgroundColor: '#FEF9C3' };
-      case 'low':
-        return { borderLeftColor: '#3B82F6', backgroundColor: '#DBEAFE' };
-      default:
-        return { borderLeftColor: '#9CA3AF', backgroundColor: '#F3F4F6' };
-    }
-  };
 
-  const getTypeColor = (type) => {
-    const map = {
-      weather: '#3B82F6',
-      health: '#EF4444',
-      terrain: '#EAB308',
-      rescue: '#22C55E',
-      trail: '#8B5CF6'
-    };
-    return map[type] || '#6B7280';
-  };
+// ─────────────────────────────── Style maps ───────────────────────────────────
+const severityStyles = {
+  high: {
+    container: { borderLeftColor: '#ef4444', backgroundColor: '#fef2f2' },
+    badge: { backgroundColor: '#fee2e2', borderColor: '#fecaca' },
+    text: { color: '#991b1b' },
+  },
+  medium: {
+    container: { borderLeftColor: '#f59e0b', backgroundColor: '#fffbeb' },
+    badge: { backgroundColor: '#fef3c7', borderColor: '#fde68a' },
+    text: { color: '#92400e' },
+  },
+  low: {
+    container: { borderLeftColor: '#3b82f6', backgroundColor: '#eff6ff' },
+    badge: { backgroundColor: '#dbeafe', borderColor: '#bfdbfe' },
+    text: { color: '#1e40af' },
+  },
+  default: {
+    container: { borderLeftColor: '#9ca3af', backgroundColor: '#f3f4f6' },
+    badge: { backgroundColor: '#e5e7eb', borderColor: '#d1d5db' },
+    text: { color: '#374151' },
+  },
+};
 
-  const highCount = mockAlerts.filter((a) => a.severity === 'high').length;
+const typeDotColors = {
+  weather: '#3b82f6',
+  health: '#ef4444',
+  terrain: '#f59e0b',
+  rescue: '#10b981',
+  trail: '#8b5cf6',
+  default: '#6b7280',
+};
 
-  return (
-    <ScrollView style={styles.container} contentContainerStyle={styles.content}>
-      {/* Nagłówek */}
-      <View style={styles.header}>
-        <Text style={styles.title}>Emergency Alerts</Text>
-        <View style={styles.badge}>
-          <Text style={styles.badgeText}>{highCount} Active</Text>
-        </View>
-      </View>
+// ───────────────────────────────── Screen ─────────────────────────────────────
+export default function AlertsScreen() {
+  const highCount = mockAlerts.filter(a => a.severity === 'high').length;
 
-      {/* Lista alertów */}
-      {mockAlerts.map((alert) => {
-        const IconComponent = alert.icon;
-        const severityStyle = getSeverityStyle(alert.severity);
+  const renderItem = ({ item }) => {
+    const IconComp = item.icon;
+    const sev = severityStyles[item.severity] || severityStyles.default;
+    const typeColor = typeDotColors[item.type] || typeDotColors.default;
 
-        return (
-          <View key={alert.id} style={[styles.card, severityStyle]}>
-            <View style={styles.cardTop}>
-              <View style={[styles.iconWrapper, { backgroundColor: getTypeColor(alert.type) }]}>
-                <IconComponent size={18} color="white" />
+    return (
+      <Card
+        style={[
+          styles.alertCard,
+          { borderLeftColor: sev.container.borderLeftColor, backgroundColor: sev.container.backgroundColor },
+        ]}
+      >
+        <View style={styles.row}>
+          <View style={[styles.typeIconWrap, { backgroundColor: typeColor }]}>
+            <IconComp size={16} color="#fff" />
+          </View>
+
+          <View style={{ flex: 1 }}>
+            <View style={styles.titleRow}>
+              <Text style={styles.titleText}>{item.title}</Text>
+              <Badge
+                outline
+                style={[
+                  styles.severityBadge,
+                  { backgroundColor: sev.badge.backgroundColor, borderColor: sev.badge.borderColor },
+                ]}
+              >
+                <Text style={[styles.severityBadgeText, sev.text]}>{String(item.severity).toUpperCase()}</Text>
+              </Badge>
+            </View>
+
+            <Text style={styles.messageText}>{item.message}</Text>
+
+            <View style={styles.metaRow}>
+              <View style={styles.metaItem}>
+                <Clock size={12} color="#6b7280" />
+                <Text style={styles.metaText}>{item.timestamp}</Text>
               </View>
-              <View style={{ flex: 1 }}>
-                <View style={styles.cardHeader}>
-                  <Text style={styles.cardTitle}>{alert.title}</Text>
-                  <View style={[styles.severityBadge, severityStyle]}>
-                    <Text style={styles.severityText}>{alert.severity.toUpperCase()}</Text>
-                  </View>
-                </View>
-                <Text style={styles.message}>{alert.message}</Text>
-                <View style={styles.meta}>
-                  <View style={styles.metaItem}>
-                    <Clock size={12} color="#6B7280" />
-                    <Text style={styles.metaText}>{alert.timestamp}</Text>
-                  </View>
-                  <View style={styles.metaItem}>
-                    <Mountain size={12} color="#6B7280" />
-                    <Text style={styles.metaText}>{alert.location}</Text>
-                  </View>
-                </View>
+              <View style={styles.metaItem}>
+                <Mountain size={12} color="#6b7280" />
+                <Text style={styles.metaText}>{item.location}</Text>
               </View>
             </View>
           </View>
-        );
-      })}
-
-      {/* Pusty stan */}
-      {mockAlerts.length === 0 && (
-        <View style={styles.emptyCard}>
-          <AlertTriangle size={48} color="#9CA3AF" />
-          <Text style={styles.emptyText}>No active alerts</Text>
-          <Text style={styles.emptySubText}>
-            You'll be notified of any emergency situations
-          </Text>
         </View>
-      )}
-    </ScrollView>
+      </Card>
+    );
+  };
+
+  return (
+    <SafeAreaView style={styles.safe}>
+      <View style={styles.container}>
+        <View style={styles.headerRow}>
+          <Text style={styles.headerTitle}>Emergency Alerts</Text>
+          <Badge outline style={[styles.countBadge, { backgroundColor: '#fef2f2', borderColor: '#fecaca' }]}>
+            <Text style={[styles.countBadgeText, { color: '#b91c1c' }]}>{highCount} Active</Text>
+          </Badge>
+        </View>
+
+        {mockAlerts.length > 0 ? (
+          <FlatList
+            data={mockAlerts}
+            keyExtractor={(item) => String(item.id)}
+            renderItem={renderItem}
+            contentContainerStyle={{ paddingVertical: 12 }}
+            ItemSeparatorComponent={() => <View style={{ height: 12 }} />}
+          />
+        ) : (
+          <Card style={styles.emptyCard}>
+            <AlertTriangle size={48} color="#9ca3af" />
+            <Text style={styles.emptyTitle}>No active alerts</Text>
+            <Text style={styles.emptySub}>You'll be notified of any emergency situations</Text>
+          </Card>
+        )}
+      </View>
+    </SafeAreaView>
   );
 }
 
-// --- STYLES ---
+// ───────────────────────────────── Styles ─────────────────────────────────────
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff'
-  },
-  content: {
-    padding: 16,
-    paddingBottom: 40
-  },
-  header: {
+  safe: { flex: 1, backgroundColor: '#fff' },
+  container: { flex: 1, paddingHorizontal: 16 },
+  headerRow: {
+    marginTop: 8,
+    marginBottom: 8,
     flexDirection: 'row',
+    alignItems: 'center',
     justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: 16
   },
-  title: {
-    fontSize: 18,
-    fontWeight: '600'
-  },
-  badge: {
-    backgroundColor: '#FEE2E2',
-    borderColor: '#FCA5A5',
-    borderWidth: 1,
-    borderRadius: 8,
-    paddingHorizontal: 8,
-    paddingVertical: 4
-  },
-  badgeText: {
-    color: '#B91C1C',
-    fontWeight: '500'
-  },
+  headerTitle: { fontSize: 20, fontWeight: '700', color: '#111827' },
+  countBadge: { paddingHorizontal: 10, paddingVertical: 6, borderRadius: 999 },
+  countBadgeText: { fontSize: 12, fontWeight: '600' },
+
   card: {
-    borderLeftWidth: 4,
-    borderRadius: 8,
+    borderRadius: 14,
+    borderWidth: 1,
+    borderColor: '#e5e7eb',
+    backgroundColor: '#fff',
     padding: 12,
-    marginBottom: 12
   },
-  cardTop: {
-    flexDirection: 'row',
-    alignItems: 'flex-start',
-    gap: 10
-  },
-  iconWrapper: {
-    padding: 6,
+  alertCard: { borderLeftWidth: 4 },
+  row: { flexDirection: 'row', alignItems: 'flex-start' },
+  typeIconWrap: {
+    width: 28,
+    height: 28,
     borderRadius: 999,
-    marginTop: 2
-  },
-  cardHeader: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 4,
-    gap: 8
-  },
-  cardTitle: {
-    fontWeight: '600',
-    fontSize: 15,
-    flexShrink: 1
-  },
-  severityBadge: {
-    borderRadius: 6,
-    paddingHorizontal: 6,
-    paddingVertical: 2
-  },
-  severityText: {
-    fontSize: 10,
-    fontWeight: '600',
-    color: '#1F2937'
-  },
-  message: {
-    fontSize: 13,
-    color: '#374151',
-    marginBottom: 6
-  },
-  meta: {
-    flexDirection: 'row',
-    gap: 16
-  },
-  metaItem: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 4
-  },
-  metaText: {
-    fontSize: 11,
-    color: '#6B7280'
-  },
-  emptyCard: {
     alignItems: 'center',
     justifyContent: 'center',
-    paddingVertical: 40
+    marginRight: 10,
+    marginTop: 2,
   },
-  emptyText: {
-    color: '#6B7280',
-    fontSize: 16,
-    marginTop: 8
-  },
-  emptySubText: {
-    color: '#9CA3AF',
-    fontSize: 13,
-    marginTop: 4
-  }
+  titleRow: { flexDirection: 'row', alignItems: 'center' },
+  titleText: { fontSize: 16, fontWeight: '600', color: '#111827', marginRight: 8 },
+  severityBadge: { paddingHorizontal: 8, paddingVertical: 4, borderRadius: 8, borderWidth: 1 },
+  severityBadgeText: { fontSize: 10, fontWeight: '700' },
+  messageText: { marginTop: 4, fontSize: 13, color: '#374151' },
+
+  metaRow: { marginTop: 8, flexDirection: 'row', alignItems: 'center' },
+  metaItem: { flexDirection: 'row', alignItems: 'center', marginRight: 16 },
+  metaText: { marginLeft: 4, fontSize: 11, color: '#6b7280' },
+
+  badgeBase: { alignSelf: 'flex-start' },
+  badgeSolid: {},
+  badgeOutline: { borderWidth: 1 },
+  badgeText: { fontSize: 12, fontWeight: '600', color: '#111827' },
+
+  emptyCard: { paddingVertical: 24, alignItems: 'center', gap: 6 },
+  emptyTitle: { marginTop: 8, fontSize: 16, fontWeight: '600', color: '#6b7280' },
+  emptySub: { fontSize: 12, color: '#9ca3af' },
 });
