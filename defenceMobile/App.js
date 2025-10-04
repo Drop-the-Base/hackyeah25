@@ -1,20 +1,198 @@
+// App.js (React Native / Expo)
+import React, { useState } from 'react';
+import { StyleSheet, Text, View, TouchableOpacity, ScrollView, SafeAreaView } from 'react-native';
+import { MapPin, AlertTriangle, BookOpen, Bell, Package, X } from 'lucide-react-native';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+
+// Dummy components (zastępstwa za MapTab, EmergencyTab itd.)
+const MapTab = () => <Text style={styles.tabText}>Map content here</Text>;
+const EmergencyTab = () => <Text style={styles.tabText}>Emergency info here</Text>;
+const GuidesTab = () => <Text style={styles.tabText}>Guides content</Text>;
+const ChecklistTab = () => <Text style={styles.tabText}>Gear checklist</Text>;
+const AlertsTab = () => <Text style={styles.tabText}>Alerts list</Text>;
+
+// Mock danych z alertami
+const mockAlerts = [
+  { id: 1, severity: 'high', title: 'Flood Warning', message: 'River level rising rapidly', icon: AlertTriangle },
+  { id: 2, severity: 'medium', title: 'Heatwave', message: 'Stay hydrated and avoid sun', icon: AlertTriangle },
+];
 
 export default function App() {
+  const [activeTab, setActiveTab] = useState('emergency');
+  const [alertDismissed, setAlertDismissed] = useState(false);
+
+  const urgentAlert = mockAlerts.find(a => a.severity === 'high');
+  const IconComponent = urgentAlert?.icon;
+
+  const renderTabContent = () => {
+    switch (activeTab) {
+      case 'map': return <MapTab />;
+      case 'emergency': return <EmergencyTab />;
+      case 'guides': return <GuidesTab />;
+      case 'gear': return <ChecklistTab />;
+      case 'alerts': return <AlertsTab />;
+      default: return null;
+    }
+  };
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
+    <SafeAreaView style={styles.safeArea}>
       <StatusBar style="auto" />
-    </View>
+
+      {/* Alert banner */}
+      {urgentAlert && !alertDismissed && (
+        <View style={styles.alertBanner}>
+          <View style={styles.alertTextContainer}>
+            {IconComponent && <IconComponent size={20} color="white" style={{ marginRight: 8 }} />}
+            <View style={{ flex: 1 }}>
+              <Text style={styles.alertTitle}>{urgentAlert.title}</Text>
+              <Text style={styles.alertMessage}>{urgentAlert.message}</Text>
+            </View>
+          </View>
+          <TouchableOpacity onPress={() => setAlertDismissed(true)}>
+            <X size={18} color="white" />
+          </TouchableOpacity>
+        </View>
+      )}
+
+      {/* Main content */}
+      <View style={styles.content}>
+        <ScrollView contentContainerStyle={styles.scrollContent}>
+          {renderTabContent()}
+        </ScrollView>
+      </View>
+
+      {/* Bottom navigation */}
+      <View style={styles.navbar}>
+        <NavButton
+          label="Map"
+          icon={MapPin}
+          active={activeTab === 'map'}
+          onPress={() => setActiveTab('map')}
+        />
+        <NavButton
+          label="Emergency"
+          icon={AlertTriangle}
+          active={activeTab === 'emergency'}
+          onPress={() => setActiveTab('emergency')}
+        />
+        <NavButton
+          label="Guides"
+          icon={BookOpen}
+          active={activeTab === 'guides'}
+          onPress={() => setActiveTab('guides')}
+        />
+        <NavButton
+          label="Gear"
+          icon={Package}
+          active={activeTab === 'gear'}
+          onPress={() => setActiveTab('gear')}
+        />
+        <NavButton
+          label="Alerts"
+          icon={Bell}
+          badge="3"
+          active={activeTab === 'alerts'}
+          onPress={() => setActiveTab('alerts')}
+        />
+      </View>
+    </SafeAreaView>
   );
 }
 
+// Komponent przycisku w nawigacji
+function NavButton({ label, icon: Icon, active, onPress, badge }) {
+  return (
+    <TouchableOpacity style={[styles.navButton, active && styles.navButtonActive]} onPress={onPress}>
+      <View style={{ position: 'relative' }}>
+        <Icon size={22} color={active ? '#007AFF' : '#444'} />
+        {badge && (
+          <View style={styles.badge}>
+            <Text style={styles.badgeText}>{badge}</Text>
+          </View>
+        )}
+      </View>
+      <Text style={[styles.navLabel, active && { color: '#007AFF' }]}>{label}</Text>
+    </TouchableOpacity>
+  );
+}
+
+// --- STYLE ---
 const styles = StyleSheet.create({
-  container: {
+  safeArea: {
     flex: 1,
     backgroundColor: '#fff',
+  },
+  alertBanner: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#DC2626',
+    padding: 12,
+    justifyContent: 'space-between',
+  },
+  alertTextContainer: {
+    flexDirection: 'row',
+    flex: 1,
+    alignItems: 'center',
+    marginRight: 8,
+  },
+  alertTitle: {
+    color: '#fff',
+    fontWeight: '600',
+    fontSize: 14,
+  },
+  alertMessage: {
+    color: '#fff',
+    opacity: 0.9,
+    fontSize: 12,
+  },
+  content: {
+    flex: 1,
+  },
+  scrollContent: {
+    padding: 16,
+  },
+  tabText: {
+    fontSize: 18,
+    textAlign: 'center',
+    color: '#222',
+    marginTop: 20,
+  },
+  navbar: {
+    flexDirection: 'row',
+    borderTopWidth: 1,
+    borderColor: '#ddd',
+    backgroundColor: '#fafafa',
+    height: 70,
+  },
+  navButton: {
+    flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  navButtonActive: {
+    backgroundColor: '#E5F0FF',
+  },
+  navLabel: {
+    fontSize: 12,
+    marginTop: 4,
+    color: '#444',
+  },
+  badge: {
+    position: 'absolute',
+    top: -5,
+    right: -8,
+    backgroundColor: '#DC2626',
+    borderRadius: 8,
+    minWidth: 16,
+    height: 16,
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingHorizontal: 3,
+  },
+  badgeText: {
+    color: 'white',
+    fontSize: 9,
+    fontWeight: 'bold',
   },
 });
