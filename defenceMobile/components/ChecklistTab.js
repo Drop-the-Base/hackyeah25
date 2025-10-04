@@ -153,21 +153,20 @@ export default function ChecklistScreen() {
 
     return (
       <Card style={[isChecked && { backgroundColor: '#ecfdf5', borderColor: '#bbf7d0' }]}>
-        <View style={styles.itemRow}>
-          <Checkbox checked={isChecked} onToggle={() => handleItemToggle(item.id)} />
+      <Pressable onPress={() => handleItemToggle(item.id)}>
+
+          <Text style={[styles.itemTitle, isChecked && styles.strike]}>{item.name}</Text>
+
           <View style={styles.itemBody}>
             <View style={styles.itemHeader}>
-              <Pressable onPress={() => handleItemToggle(item.id)}>
-                <Text style={[styles.itemTitle, isChecked && styles.strike]}>{item.name}</Text>
-              </Pressable>
               <View style={styles.badgesRow}>
                 <Badge outline>
                   <Text style={styles.badgeText}>{item.category}</Text>
                 </Badge>
                 <Badge
-                  outline
-                  style={{ backgroundColor: theme.bg, borderColor: theme.border }}
-                  textStyle={{ color: theme.text }}
+                    outline
+                    style={{ backgroundColor: theme.bg, borderColor: theme.border }}
+                    textStyle={{ color: theme.text }}
                 >
                   <View style={styles.priorityBadgeContent}>
                     {item.priority === 'essential' ? <Star size={12} color={theme.text} style={{ marginRight: 4 }} /> : null}
@@ -180,7 +179,11 @@ export default function ChecklistScreen() {
             <Text style={styles.itemDesc}>{item.description}</Text>
             {item.quantity ? <Text style={styles.itemQty}>Quantity: {item.quantity}</Text> : null}
           </View>
+
+        <View style={styles.itemRow}>
+          <Checkbox checked={isChecked} onToggle={() => handleItemToggle(item.id)} />
         </View>
+        </Pressable>
       </Card>
     );
   };
