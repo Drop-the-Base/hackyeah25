@@ -4,12 +4,12 @@ import { StyleSheet, Text, View, TouchableOpacity, ScrollView, SafeAreaView } fr
 import { MapPin, AlertTriangle, BookOpen, Bell, Package, X } from 'lucide-react-native';
 import { StatusBar } from 'expo-status-bar';
 
-// Dummy components (zastępstwa za MapTab, EmergencyTab itd.)
-const MapTab = () => <Text style={styles.tabText}>Map content here</Text>;
-const EmergencyTab = () => <Text style={styles.tabText}>Emergency info here</Text>;
-const GuidesTab = () => <Text style={styles.tabText}>Guides content</Text>;
-const ChecklistTab = () => <Text style={styles.tabText}>Gear checklist</Text>;
-const AlertsTab = () => <Text style={styles.tabText}>Alerts list</Text>;
+import MapTab from './components/MapTab';
+import EmergencyTab from './components/EmergencyTab';
+import GuidesTab from './components/GuidesTab';
+import ChecklistTab from './components/ChecklistTab';
+import AlertsTab from './components/AlertsTab';
+
 
 // Mock danych z alertami
 const mockAlerts = [
