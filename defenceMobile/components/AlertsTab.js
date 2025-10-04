@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, FlatList, StyleSheet} from 'react-native';
+import { View, Text, ScrollView, StyleSheet } from 'react-native';
 import {
   AlertTriangle,
   CloudRain,
@@ -168,6 +168,7 @@ export default function AlertsScreen() {
 
     return (
       <Card
+        key={item.id}
         style={[
           styles.alertCard,
           { borderLeftColor: sev.container.borderLeftColor, backgroundColor: sev.container.backgroundColor },
@@ -221,13 +222,9 @@ export default function AlertsScreen() {
         </View>
 
         {mockAlerts.length > 0 ? (
-          <FlatList
-            data={mockAlerts}
-            keyExtractor={(item) => String(item.id)}
-            renderItem={renderItem}
-            contentContainerStyle={{ paddingVertical: 12 }}
-            ItemSeparatorComponent={() => <View style={{ height: 12 }} />}
-          />
+          <ScrollView contentContainerStyle={{ paddingVertical: 12, gap: 12 }}>
+            {mockAlerts.map(item => renderItem({ item }))}
+          </ScrollView>
         ) : (
           <Card style={styles.emptyCard}>
             <AlertTriangle size={48} color="#9ca3af" />
