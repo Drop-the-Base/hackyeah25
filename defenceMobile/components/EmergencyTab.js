@@ -82,9 +82,8 @@ function generateResponse(message) {
   if (msg.includes('aid') || msg.includes('injury')) return pick(survivalKnowledge.firstaid);
 
   const general = [
-    "Ask me about fire, water, shelter, navigation, signaling, food, or first aid.",
-    "Remember the Rule of 3s: 3 minutes without air, 3 hours without shelter, 3 days without water, 3 weeks without food.",
-    "Stay calm and prioritize safety, shelter, signaling, water, then food.",
+    "Stay calm and prioritize safety, shelter, signaling, water, then food. Ask me if you need any tips!",
+
   ];
   return pick(general);
 }
