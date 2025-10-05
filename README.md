@@ -1,6 +1,8 @@
-# hackyeah25
+# mSurvivor
+## hackyeah25
 
 This repository contains a defence-open project for hackyeah 2025
+mSurvivor (mPrzetrwaniec)
 
 ## Mobile for Android:
 you can download the app from here:
