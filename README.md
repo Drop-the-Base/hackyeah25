@@ -12,10 +12,8 @@ cd defenceMobile
 npm install
 ```
 
+To run this app, you need Expo app!
 **Run:**
 ```bash
 npm start        # Start Expo dev server
-npm run android  # Run on Android
-npm run ios      # Run on iOS (macOS only)
-npm run web      # Run in web browser
 ```
