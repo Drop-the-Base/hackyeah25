@@ -3,7 +3,7 @@ import chromadb
 from chromadb.config import Settings
 from openai import OpenAI
 
-from ..config import (
+from config import (
     GEMINI_API_KEY,
     GEMINI_BASE_URL,
     EMBEDDING_MODEL,
@@ -70,3 +70,6 @@ class VectorStore:
                 }
             )
         return results
+
+    def is_empty(self) -> bool:
+        return self._collection.count() == 0

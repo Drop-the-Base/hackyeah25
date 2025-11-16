@@ -3,8 +3,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-# --- GEMINI przez OpenAI SDK ---
-GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")  # klucz z Google AI Studio
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 GEMINI_BASE_URL = os.getenv(
     "GEMINI_BASE_URL",
     "https://generativelanguage.googleapis.com/v1beta/openai/"
