@@ -1,0 +1,193 @@
+{
+  "docs": [
+    {
+      "id": "civilian-shelter-001",
+      "text": "W czasie alarmu nalotowego natychmiast udaj się do schronu lub najniższego pomieszczenia w budynku, z dala od okien. \nŚciany z żelbetu i ziemia dobrze tłumią falę uderzeniową; wybierz piwnicę lub podziemny parking. \nSiądź przy ścianie nośnej, przykryj głowę, jeśli to możliwe, kocem lub kurtką, aby chronić się przed odłamkami. \nPo ogłoszeniu końca alarmu zaczekaj kilka minut, aż zewnętrzne zagrożenia (spadające odłamki) miną, i dopiero wtedy wyjdź na powierzchnię.",
+      "metadata": {
+        "category": "civilian",
+        "topic": "shelter_during_air_raid",
+        "source": "seed_json"
+      }
+    },
+    {
+      "id": "civilian-evacuation-002",
+      "text": "Jeśli władze zarządzą ewakuację, zabierz przygotowany plecak z dokumentami, środkami pierwszej pomocy, wodą, jedzeniem o długim terminie przydatności i latarką. \nWyłącz prąd, gaz i zamknij wodę w mieszkaniu, zamknij okna i drzwi. \nPodążaj za instrukcjami służb ratunkowych, korzystaj z wyznaczonych tras ewakuacyjnych i nie próbuj wracać po zapomniane rzeczy. \nPodczas drogi trzymaj się grupy, bądź uważny na otoczenie i informuj służby o osobach potrzebujących pomocy.",
+      "metadata": {
+        "category": "civilian",
+        "topic": "evacuation_procedure",
+        "source": "seed_json"
+      }
+    },
+    {
+      "id": "civilian-firstaid-003",
+      "text": "Podstawowa znajomość pierwszej pomocy może uratować życie w trakcie konfliktu. \nPrzy krwotokach uciskaj miejsce zranienia czystą tkaniną lub opaską, unieś uszkodzoną kończynę powyżej serca. \nJeśli poszkodowany nie oddycha, rozpocznij resuscytację krążeniowo-oddechową (30 uciśnięć klatki piersiowej na dwa wdechy). \nZawsze noś w apteczce jednorazowe rękawiczki, środki dezynfekujące, bandaże, opatrunki i środki przeciwbólowe. Po udzieleniu pomocy zgłoś stan poszkodowanego służbom medycznym.",
+      "metadata": {
+        "category": "civilian",
+        "topic": "first_aid_basic",
+        "source": "seed_json"
+      }
+    },
+    {
+      "id": "civilian-water-004",
+      "text": "Czysta woda jest kluczowa dla przetrwania. W razie braku bieżącej wody magazynuj ją w zamkniętych pojemnikach, zbieraj deszczówkę do czystych zbiorników lub wykop studnię infiltracyjną w pobliżu rzeki. \nPrzed spożyciem wodę przegotuj co najmniej przez 1 minutę, lub 3 minuty na wysokości powyżej 2000 metrów n.p.m. \nMożesz też użyć filtrów survivalowych o membranie 0,1–0,2 mikrona, tabletek dezynfekujących z jodem lub chlorem albo improwizowanego filtra z węgla drzewnego, piasku i tkaniny.",
+      "metadata": {
+        "category": "civilian",
+        "topic": "water_acquisition",
+        "source": "seed_json"
+      }
+    },
+    {
+      "id": "civilian-food-005",
+      "text": "W trudnych warunkach miejskich ważne jest posiadanie zapasu żywności o długim terminie ważności: konserw, suszonego mięsa, ryżu, makaronu i orzechów. \nNie otwieraj zapasów od razu; spożywaj żywność o krótszym terminie ważności w pierwszej kolejności. \nJeśli korzystasz z otwartego ognia do gotowania, rób to w dobrze wentylowanych miejscach z dala od materiałów łatwopalnych. Pamiętaj o higienie – myj ręce lub używaj środków dezynfekujących przed przygotowaniem i spożyciem posiłków.",
+      "metadata": {
+        "category": "civilian",
+        "topic": "food_storage",
+        "source": "seed_json"
+      }
+    },
+    {
+      "id": "civilian-hygiene-006",
+      "text": "Zachowanie higieny chroni przed chorobami w sytuacjach kryzysowych. Utrzymuj ręce w czystości, używając wody z mydłem lub środka antybakteryjnego. \nZużyte opatrunki, odpady organiczne i fekalia przechowuj w zamkniętych pojemnikach lub zakopuj z dala od źródeł wody. \nUnikaj kontaktu z krwią i płynami ustrojowymi – używaj rękawiczek jednorazowych podczas opieki medycznej. Dezynfekuj powierzchnie, na których przygotowujesz jedzenie i przechowujesz wodę.",
+      "metadata": {
+        "category": "civilian",
+        "topic": "hygiene_sanitation",
+        "source": "seed_json"
+      }
+    },
+    {
+      "id": "civilian-communication-007",
+      "text": "Zachowanie kontaktu z bliskimi i służbami jest kluczowe. Miej naładowany telefon i zapasową ładowarkę (powerbank). \nW sytuacjach, gdy sieć komórkowa przestaje działać, korzystaj z radia na baterie lub ręcznie zasilanego, aby śledzić komunikaty. \nUstal z rodziną miejsce spotkania na wypadek rozdzielenia oraz hasła do potwierdzenia tożsamości. \nNie rozpowszechniaj niezweryfikowanych informacji, aby nie szerzyć paniki.",
+      "metadata": {
+        "category": "civilian",
+        "topic": "communication_and_information",
+        "source": "seed_json"
+      }
+    },
+    {
+      "id": "civilian-fire-008",
+      "text": "Jeśli wybuchnie pożar w budynku, natychmiast opuść zagrożone pomieszczenie, zamykając za sobą drzwi, aby ograniczyć rozprzestrzenianie ognia. \nNie używaj windy, schodź po klatce schodowej; jeśli korytarz jest zadymiony, przemieszczaj się na czworakach pod linią dymu. \nPrzyłóż mokry materiał do nosa i ust, żeby ograniczyć wdychanie dymu. Jeśli nie możesz wyjść, uszczelnij drzwi mokrymi ręcznikami i czekaj na przybycie straży pożarnej, sygnalizując swoją obecność np. światłem latarki z okna.",
+      "metadata": {
+        "category": "civilian",
+        "topic": "fire_safety",
+        "source": "seed_json"
+      }
+    },
+    {
+      "id": "civilian-chemical-009",
+      "text": "W przypadku podejrzenia ataku chemicznego szybko opuszcz obszar skażony, udaj się pod wiatr lub na wyższy teren, gdy substancja jest cięższa od powietrza. \nZasłoń usta i nos maską z filtrem lub wilgotnym materiałem. Zdejmij skażone ubranie (bez kontaktu z twarzą), zamknij je w worku i opłucz ciało wodą. \nJeśli służby dystrybuują środki odkażające, użyj ich zgodnie z instrukcją. Po dotarciu do bezpiecznego miejsca monitoruj oficjalne komunikaty o zagrożeniu.",
+      "metadata": {
+        "category": "civilian",
+        "topic": "chemical_attack_response",
+        "source": "seed_json"
+      }
+    },
+    {
+      "id": "civilian-radiation-010",
+      "text": "W przypadku zagrożenia radiacyjnego jak najszybciej wejdź do szczelnego budynku o grubych ścianach; podziemne pomieszczenia zapewniają najlepszą ochronę. \nZamknij okna, drzwi, wyłącz wentylację i uszczelnij szczeliny taśmą, aby zapobiec wnikaniu skażonego powietrza. \nPrzyjmuj tabletki jodku potasu tylko wtedy, gdy zalecą to służby, i w dawce odpowiadającej Twojemu wiekowi. \nPo ustaniu zagrożenia unikaj spożywania produktów z otwartego terenu, dopóki władze nie potwierdzą ich bezpieczeństwa.",
+      "metadata": {
+        "category": "civilian",
+        "topic": "radiation_protection",
+        "source": "seed_json"
+      }
+    },
+    {
+      "id": "civilian-explosives-011",
+      "text": "Jeśli zobaczysz niewybuch lub podejrzany pakunek, nie dotykaj go ani nie przemieszczaj. Oznacz miejsce i powiadom służby. \nOddal się na bezpieczną odległość (co najmniej 300 metrów) i ostrzeż innych. \nW budynku unikaj zamykania się w jednym pomieszczeniu nad niewybuchem – fala uderzeniowa może spowodować zawalenie stropu. \nCzekaj na przybycie saperów i stosuj się do ich poleceń.",
+      "metadata": {
+        "category": "civilian",
+        "topic": "handling_unexploded_ordnance",
+        "source": "seed_json"
+      }
+    },
+    {
+      "id": "civilian-powerout-012",
+      "text": "Przygotuj się na przerwy w dostawie prądu: miej zapas świec, latarek, baterii i powerbanków. \nPo wyłączeniu zasilania odłącz wrażliwe urządzenia elektroniczne od sieci, aby zapobiec uszkodzeniom przy ponownym włączeniu. \nZapasuj żywność niewymagającą chłodzenia; lodówkę otwieraj jak najrzadziej, aby zachować niską temperaturę. \nSłuchaj radia na baterie, aby być na bieżąco z informacjami o usuwaniu awarii i działaniach służb.",
+      "metadata": {
+        "category": "civilian",
+        "topic": "power_outage_preparedness",
+        "source": "seed_json"
+      }
+    },
+    {
+      "id": "civilian-psychological-013",
+      "text": "Długotrwały stres związany z konfliktem może prowadzić do wyczerpania psychicznego. \nUtrzymuj rutynę dnia, wykonuj proste ćwiczenia fizyczne i dbaj o relacje z bliskimi. \nRozmawiaj o swoich uczuciach z zaufanymi osobami, unikaj kompulsywnego śledzenia wiadomości, ograniczając czas przed ekranem. \nJeśli zauważysz u siebie lub innych objawy silnego lęku, depresji lub myśli samobójczych, poszukaj pomocy u specjalisty lub zaufanej organizacji pomocowej.",
+      "metadata": {
+        "category": "civilian",
+        "topic": "psychological_resilience",
+        "source": "seed_json"
+      }
+    },
+    {
+      "id": "civilian-childcare-014",
+      "text": "W czasie zagrożenia zadbaj o bezpieczeństwo dzieci: wyjaśnij im, co się dzieje, w prostych słowach, nie wzbudzając paniki. \nPrzygotuj plecak dla dziecka z jego ulubioną zabawką, jedzeniem i napojem, by zapewnić poczucie bezpieczeństwa podczas ewakuacji. \nNaucz dzieci, jak reagować na alarm (np. zakrycie uszu, schowanie się pod stołem), ale zawsze towarzysz im. \nW sytuacjach kryzysowych trzymaj dzieci przy sobie, by nie zgubiły się w tłumie, i zanotuj na kartce ważne informacje (imię, nazwisko, numer telefonu).",
+      "metadata": {
+        "category": "civilian",
+        "topic": "childcare_in_emergencies",
+        "source": "seed_json"
+      }
+    },
+    {
+      "id": "civilian-elderly-015",
+      "text": "Osoby starsze często wymagają szczególnej opieki. Przygotuj dla nich zapas leków na kilka tygodni oraz listę przyjmowanych preparatów. \nUpewnij się, że mają zawsze przy sobie dokument tożsamości i dane kontaktowe do rodziny. \nW razie ewakuacji pomóż im spakować ubrania, środki higieniczne i wskaż, jak korzystać z urządzeń ratunkowych (maska, latarka). \nRegularnie sprawdzaj ich stan zdrowia i dostosuj plan awaryjny do ich ograniczeń ruchowych.",
+      "metadata": {
+        "category": "civilian",
+        "topic": "elderly_care_in_crisis",
+        "source": "seed_json"
+      }
+    },
+    {
+      "id": "civilian-disabled-016",
+      "text": "Dla osób z niepełnosprawnościami należy wcześniej przygotować indywidualny plan ewakuacji. \nZorganizuj środki wspomagające poruszanie się (wózek, kule), a także dodatkowe baterie lub ładowarki do urządzeń medycznych (np. pomp insulinowych). \nUstal z sąsiadami lub rodziną, kto pomoże w zniesieniu osoby z wyższego piętra w razie braku windy. \nW schronie zapewnij im miejsce umożliwiające łatwe przemieszczanie się i dostęp do niezbędnych sprzętów.",
+      "metadata": {
+        "category": "civilian",
+        "topic": "assistance_for_disabled",
+        "source": "seed_json"
+      }
+    },
+    {
+      "id": "civilian-pets-017",
+      "text": "Podczas ewakuacji zabierz ze sobą swoje zwierzęta domowe. Przygotuj dla nich transporter, zapas jedzenia, wody i dokumenty szczepień. \nUpewnij się, że zwierzę ma obrożę z aktualnymi danymi kontaktowymi. \nW schronie trzymaj zwierzęta na smyczy lub w transporterze, aby zapobiec ich ucieczce i niepokoju innych osób. \nPo powrocie do domu obserwuj zachowanie pupila – stres może powodować agresję lub apatię, wymagającą konsultacji z weterynarzem.",
+      "metadata": {
+        "category": "civilian",
+        "topic": "pet_safety_and_evacuation",
+        "source": "seed_json"
+      }
+    },
+    {
+      "id": "civilian-supplykit-018",
+      "text": "Zestaw awaryjny powinien zawierać: wodę (minimum 2 litry na osobę na dzień na 3 dni), konserwy, batoniki energetyczne, apteczkę pierwszej pomocy, radio na baterie, latarkę, zapas baterii, powerbank, wielofunkcyjny nóż, zapałki lub zapalniczkę, śpiwór, dokumenty w wodoodpornej teczce i gotówkę. \nRegularnie sprawdzaj daty ważności i stan techniczny wyposażenia. \nPrzechowuj zestaw w dostępnym miejscu, by móc go szybko zabrać w razie ewakuacji.",
+      "metadata": {
+        "category": "civilian",
+        "topic": "emergency_supply_kit",
+        "source": "seed_json"
+      }
+    },
+    {
+      "id": "civilian-repairs-019",
+      "text": "Po ustaniu zagrożenia, zanim wrócisz do domu, upewnij się, że budynek jest bezpieczny: sprawdź ściany i stropy pod kątem pęknięć, zapachu gazu i wiszących przewodów elektrycznych. \nNie włączaj natychmiast prądu ani gazu – zleć to profesjonalistom lub poczekaj na komunikat służb. \nUsuń rozbite szkło i odłamki w grubych rękawicach, a cięższe elementy pozostaw do usunięcia przez specjalistów. \nZgłaszaj wszelkie uszkodzenia infrastruktury odpowiednim organom, by otrzymać wsparcie i zapobiec dalszym wypadkom.",
+      "metadata": {
+        "category": "civilian",
+        "topic": "post_disaster_home_safety",
+        "source": "seed_json"
+      }
+    },
+    {
+      "id": "civilian-legal-020",
+      "text": "Znajomość swoich praw jako cywila jest ważna w czasie konfliktu. Unikaj uczestnictwa w działaniach bojowych, chyba że jesteś powołany w ramach obowiązku wojskowego. \nPamiętaj, że plądrowanie i przywłaszczanie sobie mienia jest przestępstwem. \nJeśli zostaniesz zatrzymany przez wojsko, zachowaj spokój, okazuj dokumenty i informuj o swojej cywilnej tożsamości; masz prawo do humanitarnego traktowania. \nW przypadku naruszenia praw kontaktuj się z organizacjami humanitarnymi lub prawnymi, które oferują pomoc cywilom.",
+      "metadata": {
+        "category": "civilian",
+        "topic": "civilian_rights_and_duties",
+        "source": "seed_json"
+      }
+    },
+    {
+      "id": "civilian-community-021",
+      "text": "Współpraca z sąsiadami wzmacnia bezpieczeństwo. Organizuj wspólne spotkania, aby omówić plany awaryjne i podzielić się zasobami. \nUstal system wzajemnego wsparcia, np. dyżury przy wspólnym agregacie prądotwórczym, oraz wspólne zakupy niezbędnych artykułów. \nW razie zagrożenia działajcie jako grupa, pomagając osobom starszym i niepełnosprawnym. \nWspólnotowe działania zwiększają morale i ułatwiają reagowanie na kryzysy.",
+      "metadata": {
+        "category": "civilian",
+        "topic": "community_support",
+        "source": "seed_json"
+      }
+    }
+  ]
+}
