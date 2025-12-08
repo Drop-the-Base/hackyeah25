@@ -15,3 +15,5 @@ EMBEDDING_MODEL = os.getenv("EMBEDDING_MODEL", "gemini-embedding-001")
 
 CHROMA_DIR = os.getenv("CHROMA_DIR", "./chroma_db")
 CHROMA_COLLECTION = os.getenv("CHROMA_COLLECTION", "mprzetrwaniec")
+
+ALERTS_API_URL = os.getenv("ALERTS_API_URL")

@@ -1,5 +1,7 @@
 from pydantic import BaseModel
 from typing import List, Dict, Optional
+from alerts.models import News, Answer
+from guides.models import KnowledgeDoc
 
 class IngestDoc(BaseModel):
     id: str
@@ -25,3 +27,26 @@ class SourceOut(BaseModel):
 class QueryResponse(BaseModel):
     answer: str
     sources: List[SourceOut]
+    
+
+class AlertsRequest(BaseModel):
+    province: Optional[str] = None     
+    alarm_only: Optional[bool] = False 
+
+
+class AlertResponse(BaseModel):
+    total: int
+    filtered: int
+    items: List[News]
+    raw: Answer   
+    
+
+class KnowledgeRequest(BaseModel):
+    category: Optional[str] = None
+    topic: Optional[str] = None
+
+
+class KnowledgeResponse(BaseModel):
+    total: int
+    filtered: int
+    docs: List[KnowledgeDoc]
