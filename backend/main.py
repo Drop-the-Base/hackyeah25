@@ -1,18 +1,26 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from rag.rag_service import RAGService
 from pathlib import Path
 
 from schemas import (
-IngestRequest, QueryRequest, SourceOut, QueryResponse
+    IngestRequest, QueryRequest, SourceOut, QueryResponse
 )
 
 BASE_DIR = Path(__file__).resolve().parent
 SEED_PATH = BASE_DIR / "data" / "knowledge_base.json"
 
-
-
-
 app = FastAPI(title="RAG API", version="1.0.0")
+
+# --- Konfiguracja CORS ---
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # To nie jest najbezpieczniejsze, ale za to łatwe :)
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 rag_service = RAGService()
 
 @app.on_event("startup")
@@ -25,7 +33,6 @@ def ingest_docs(payload: IngestRequest):
     docs = [doc.model_dump() for doc in payload.docs]
     rag_service.ingest(docs)
     return {"status": "ok", "ingested": len(docs)}
-
 
 @app.post("/query", response_model=QueryResponse)
 def query_rag(payload: QueryRequest):

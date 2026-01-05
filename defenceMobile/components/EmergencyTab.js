@@ -23,6 +23,12 @@ import {
 } from 'lucide-react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
+// --- KONFIGURACJA API ---
+// Android Emulator: 'http://10.0.2.2:8000/query'
+// iOS Simulator: 'http://localhost:8000/query'
+// Fizyczny telefon: 'http://TWOJE_IP_Z_SIECI:8000/query'
+const API_URL = 'http://192.168.1.168:8000/query';
+
 const emergencyNumbers = [
   { id: 1, service: 'Emergency Services', number: '112', icon: AlertTriangle, color: '#ef4444', description: 'Life-threatening emergencies' },
   { id: 2, service: 'Police', number: '997', icon: Shield, color: '#3b82f6', description: 'Crime, violence, theft' },
@@ -37,36 +43,10 @@ const emergencyNumbers = [
   { id: 11, service: 'Child Alert', number: '995', icon: Shield, color: '#22c55e', description: 'Serious injury, illness' },
 ];
 
-const survivalKnowledge = {
-  fire: ["Gather dry tinder (birch bark, dry grass) and kindling before starting a fire.", "Clear the area and keep water nearby for safety."],
-  water: ["Boil water for at least 1 minute to kill bacteria and parasites.", "Look for running water sources, not stagnant ones."],
-  shelter: ["Find a dry spot protected from wind and rain.", "Use branches and leaves for insulation."],
-  navigation: ["The sun rises in the east and sets in the west.", "Follow rivers downstream — they often lead to civilization."],
-  signaling: ["Three of anything is a distress signal (whistles, fires).", "Use reflective surfaces to signal aircraft."],
-  food: ["Never eat what you can't identify.", "Cook food when possible to kill parasites."],
-  firstaid: ["Stop bleeding with direct pressure and elevation.", "For sprains, use RICE: Rest, Ice, Compression, Elevation."],
-};
-
-function generateResponse(message) {
-  const msg = message.toLowerCase();
-  const pick = (arr) => arr[Math.floor(Math.random() * arr.length)];
-
-  if (msg.includes('fire')) return pick(survivalKnowledge.fire);
-  if (msg.includes('water')) return pick(survivalKnowledge.water);
-  if (msg.includes('shelter')) return pick(survivalKnowledge.shelter);
-  if (msg.includes('navigate') || msg.includes('lost')) return pick(survivalKnowledge.navigation);
-  if (msg.includes('signal')) return pick(survivalKnowledge.signaling);
-  if (msg.includes('food')) return pick(survivalKnowledge.food);
-  if (msg.includes('aid') || msg.includes('injury')) return pick(survivalKnowledge.firstaid);
-
-  const general = ["Stay calm and prioritize safety, shelter, signaling, water, then food. Ask me if you need any tips!"];
-  return pick(general);
-}
-
 export default function EmergencyTab() {
   const [tab, setTab] = useState('contacts');
   const [messages, setMessages] = useState([
-    { id: 1, sender: 'assistant', message: "Hello! I'm your survival assistant. Ask me about fire, water, shelter, navigation, signaling, food, or first aid.", timestamp: new Date() },
+    { id: 1, sender: 'assistant', message: "Hello! I'm your AI survival assistant. Ask me anything about safety or survival protocols.", timestamp: new Date() },
   ]);
   const [inputMessage, setInputMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -76,18 +56,57 @@ export default function EmergencyTab() {
     Linking.openURL(`tel:${number}`).catch(() => alert('Unable to make a call.'));
   };
 
-  const handleSend = () => {
+  const handleSend = async () => {
     if (!inputMessage.trim()) return;
-    const newMessage = { id: Date.now(), sender: 'user', message: inputMessage.trim(), timestamp: new Date() };
-    setMessages(prev => [...prev, newMessage]);
+
+    // 1. Dodaj wiadomość użytkownika do UI
+    const userMsgText = inputMessage.trim();
+    const newUserMessage = { id: Date.now(), sender: 'user', message: userMsgText, timestamp: new Date() };
+
+    setMessages(prev => [...prev, newUserMessage]);
     setInputMessage('');
     setIsLoading(true);
 
-    setTimeout(() => {
-      const reply = generateResponse(newMessage.message);
-      setMessages(prev => [...prev, { id: Date.now() + 1, sender: 'assistant', message: reply, timestamp: new Date() }]);
+    try {
+      const response = await fetch(API_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          query: userMsgText,
+          k: 4 // Opcjonalnie: ilość dokumentów kontekstu? chyba? co to za parametr XD
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`Server error: ${response.status}`);
+      }
+
+      const data = await response.json();
+
+      const botResponse = {
+        id: Date.now() + 1,
+        sender: 'assistant',
+        message: data.answer,
+        timestamp: new Date()
+      };
+
+      setMessages(prev => [...prev, botResponse]);
+
+    } catch (error) {
+      console.error("API Connection Error:", error);
+
+      const errorResponse = {
+        id: Date.now() + 1,
+        sender: 'assistant',
+        message: "⚠️ Connection error. Please check if the backend server is running and reachable.",
+        timestamp: new Date()
+      };
+      setMessages(prev => [...prev, errorResponse]);
+    } finally {
       setIsLoading(false);
-    }, 1200);
+    }
   };
 
   useEffect(() => {

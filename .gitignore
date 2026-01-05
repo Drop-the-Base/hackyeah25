@@ -16,6 +16,7 @@ backend/htmlcov/
 backend/dist/
 backend/build/
 backend/*.egg-info/
+backend/chroma_db
 
 # Node.js (Frontend & Mobile)
 **/node_modules/
