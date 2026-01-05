@@ -63,7 +63,7 @@ class RAGService:
         system_prompt = (
             "Jesteś asystentem RAG. Odpowiadasz WYŁĄCZNIE na podstawie kontekstu.\n"
             "Jeśli odpowiedź nie wynika z kontekstu, napisz, że nie wiesz.\n"
-            "Odpowiadasz po polsku.\n"
+            "Odpowiadasz w języku w jakim zostało zadane pytanie.\n"
             "Zwróć wynik TYLKO w formacie JSON zgodnym ze schematem, "
             "który otrzymujesz w parametrze response_format."
         )
