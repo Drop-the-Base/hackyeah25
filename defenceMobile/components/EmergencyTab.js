@@ -27,7 +27,10 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 // Android Emulator: 'http://10.0.2.2:8000/query'
 // iOS Simulator: 'http://localhost:8000/query'
 // Fizyczny telefon: 'http://TWOJE_IP_Z_SIECI:8000/query'
-const API_URL = 'http://192.168.1.168:8000/query';
+
+//const LOCAL_IP = process.env.EXPO_PUBLIC_LOCAL_IP || 'localhost';
+const LOCAL_IP = '192.168.1.168'; // Honestly, nie chce mi się nawet do env'a jednak, bo EXPO_PUBLIC i cośtam cośtam errors
+const API_URL = `http://${LOCAL_IP}:8000/query`;
 
 const emergencyNumbers = [
   { id: 1, service: 'Emergency Services', number: '112', icon: AlertTriangle, color: '#ef4444', description: 'Life-threatening emergencies' },

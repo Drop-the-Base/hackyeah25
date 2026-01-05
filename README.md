@@ -23,3 +23,8 @@ To run this version you need Expo app!
 ```bash
 npm start        # Start Expo dev server
 ```
+
+To run the backend, you can use this!
+```bash
+ uvicorn main:app --reload --host 0.0.0.0 --port 8000
+```
